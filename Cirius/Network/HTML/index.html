@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="General" name="rating"/>
+	<link type="text/plain" rel="author" href="http://news.ncsu.edu/humans.txt" />
+
+	<title>  STR Database</title>
+
+	<script>
+	// Picture element HTML5 shiv
+	document.createElement( "picture" );
+	</script>
+	<script src="https://news.ncsu.edu/wp-content/themes/ncstate-news/js/picturefill.js" async></script>
+
+	<!-- Styles -->
+	<link href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css" />
+	<link href="https://cdn.ncsu.edu/brand-assets/fonts/print-only.css" rel="stylesheet" type="text/css" />
+	<link href="https://news.ncsu.edu/wp-content/themes/ncstate-news/style.css?1449694735" rel="stylesheet" media="screen" type="text/css" />
+	<link href="https://news.ncsu.edu/wp-content/themes/ncstate-news/print.css" rel="stylesheet" media="print" type="text/css" />
+	<link rel="stylesheet" href="https://news.ncsu.edu/wp-content/themes/ncstate-news/css/fancybox/jquery.fancybox.css?v=2.0.6" type="text/css" media="screen" />
+	<link rel="stylesheet" href="https://news.ncsu.edu/wp-content/themes/ncstate-news/css/fancybox/jquery.fancybox-buttons.css?v=1.0.2" type="text/css" media="screen" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+
+	<meta property="og:type" content="article" />
+    <meta property="og:url" content="https://news.ncsu.edu/2012/01/csi-nc-state/" />
+    <meta property="og:image" content="" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:site" content="@ncstate" />
+    <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/ub-ga.php"></script>
+
+	<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="uploadify/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="uploadify/swfobject.js"></script>
+    <script type="text/javascript" src="uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+	<link rel="alternate" type="application/rss+xml" title="NC State News &raquo; CSI: NC State Comments Feed" href="https://news.ncsu.edu/2012/01/csi-nc-state/feed/" />
+    <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/news.ncsu.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.3.1"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+    </script>
+    <script type="text/javascript">
+        function save_path(fpath){
+            document.getElementById('fpath').value = fpath.value
+        }
+
+        function popMarkers(allele){
+            var elem = document.getElementById('markers');
+            switch(allele.value) {
+                case 'all':
+                    $('optgroup[label=Autosomal]').attr('disabled', false);
+                    $('optgroup[label=X]').attr('disabled', false);
+                    $('optgroup[label=Y]').attr('disabled', false);
+                    break;
+                case 'AnY':
+                    $('optgroup[label=Autosomal]').attr('disabled', false);
+                    $('optgroup[label=X]').attr('disabled', true);
+                    $('optgroup[label=Y]').attr('disabled', false);
+                    break;
+                case 'AnX':
+                    $('optgroup[label=Autosomal]').attr('disabled', false);
+                    $('optgroup[label=X]').attr('disabled', false);
+                    $('optgroup[label=Y]').attr('disabled', true);
+
+                    break;
+                case 'XnY':
+                    $('optgroup[label=Autosomal]').attr('disabled', true);
+                    $('optgroup[label=X]').attr('disabled', false);
+                    $('optgroup[label=Y]').attr('disabled', false);
+
+                    break;
+                case 'A':
+                    $('optgroup[label=Autosomal]').attr('disabled', false);
+                    $('optgroup[label=X]').attr('disabled', true);
+                    $('optgroup[label=Y]').attr('disabled', true);
+
+                    break;
+                case 'X':
+                    $('optgroup[label=Autosomal]').attr('disabled', true);
+                    $('optgroup[label=X]').attr('disabled', false);
+                    $('optgroup[label=Y]').attr('disabled', true);
+                    break;
+                case 'Y':
+                    $('optgroup[label=Autosomal]').attr('disabled', true);
+                    $('optgroup[label=X]').attr('disabled', true);
+                    $('optgroup[label=Y]').attr('disabled', false);
+                    break;
+            }
+        }
+
+
+
+        function validate_activity() {
+            var fup = document.getElementById("fname");
+            var filename = fup.value;
+            var container = document.getElementById ("markers");
+
+            var message = "";
+            if (!filename){
+                message = "Please select a file to be analyzed. \n";
+            } else {
+                var ext = filename.substr(filename.lastIndexOf('.')+1)
+                if (ext != 'fasta' & ext != 'fastq'){
+                    message = message + "Please select a FASTA or FASTQ file. \n";
+                }
+            }
+            if (commentform.markers.selectedIndex < 0) {
+                message = message + "Please select one or more markers. \n";
+            }
+            if (message.length > 1) {
+                alert(message);
+                return false;
+            } else {
+                document.getElementById("filepath").value = filename;
+                return true;
+            }
+
+        }
+    </script>
+    <style type="text/css">
+    <!--
+            img.wp-smiley,
+            img.emoji {
+	           display: inline !important;
+	           border: none !important;
+	           box-shadow: none !important;
+	           height: 1em !important;
+	           width: 1em !important;
+               margin: 0 .07em !important;
+	           vertical-align: -0.1em !important;
+	           background: none !important;
+	           padding: 0 !important;
+            }
+
+            table, th, td {
+                border-collapse: collapse;
+                border: 0px solid black;
+                font-family: Arial;
+                font-size: 10pt;}
+    -->
+    </style>
+    <link rel='stylesheet' id='events_map_style-css'  href='https://news.ncsu.edu/wp-content/plugins/ncstate-events/css/style.css?ver=4.3.1' type='text/css' media='all' />
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3&#038;ver=4.3.1'></script>
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://news.ncsu.edu/xmlrpc.php?rsd" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://news.ncsu.edu/wp-includes/wlwmanifest.xml" />
+    <link rel='prev' title='NC State forensic sciences: Virtual crime scene' href='https://news.ncsu.edu/2012/01/virtual-crime-scene/' />
+    <link rel='next' title='NC State forensic sciences: Research for the real world' href='https://news.ncsu.edu/2012/01/research-in-the-real-world/' />
+    <meta name="generator" content="WordPress 4.3.1" />
+    <link rel='canonical' href='https://news.ncsu.edu/2012/01/csi-nc-state/' />
+    <link rel='shortlink' href='https://news.ncsu.edu/?p=6607' />
+    <link rel='https://github.com/WP-API/WP-API' href='https://news.ncsu.edu/wp-json' />
+</head>
+<body>
+<a class="sr-only" href="#main-content">Skip to main content</a>
+<div id="ncstate-utility-bar"></div>
+<div class="primary-nav">
+	<div class="container">
+	<!-- A menu must defined in the Dashboard called "Primary Nav" -->
+	<h2 class="blog-menu-heading-text"><a href="/">NC State News</a></h2>
+	<ul id="menu-primary-nav" class="blog-menu list-unstyled" aria-label="Main Menu">
+	   <li id="menu-item-142034" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-142034"><a href="https://news.ncsu.edu/category/research-and-innovation/">Research and Innovation</a>
+       <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-142036" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142036"><a href="https://news.ncsu.edu/category/research-and-innovation/the-abstract/">The Abstract</a></li>
+	       <li id="menu-item-142035" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-142035"><a href="https://news.ncsu.edu/category/research-and-innovation/partners/">Partners</a></li>
+        </ul>
+        </li>
+        <li id="menu-item-142024" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-142024"><a href="https://news.ncsu.edu/category/campus-life/">Campus Life</a>
+        <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-142025" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-142025"><a href="https://news.ncsu.edu/category/campus-life/academics/">Academics</a></li>
+	       <li id="menu-item-142027" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142027"><a href="https://news.ncsu.edu/category/campus-life/athletics/">Athletics</a></li>
+	       <li id="menu-item-142028" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142028"><a href="https://news.ncsu.edu/category/campus-life/events/">Events</a></li>
+           <li id="menu-item-142029" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142029"><a href="https://news.ncsu.edu/category/campus-life/students/">Students</a></li>
+        </ul>
+        </li>
+        <li id="menu-item-142030" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-142030"><a href="https://news.ncsu.edu/category/faculty-and-staff/">Faculty and Staff</a>
+        <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-142033" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142033"><a href="https://news.ncsu.edu/category/faculty-and-staff/hr-finance/">HR and Finance</a></li>
+	       <li id="menu-item-142031" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142031"><a href="https://news.ncsu.edu/category/faculty-and-staff/awards-honors/">Awards and Honors</a></li>
+	       <li id="menu-item-142032" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142032"><a href="https://news.ncsu.edu/category/faculty-and-staff/faculty-focus/">Faculty Focus</a></li>
+        </ul>
+        </li>
+        <li id="menu-item-142037" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-142037"><a href="https://news.ncsu.edu/category/service-and-community/">Service and Community</a>
+        <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-142026" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-142026"><a href="https://news.ncsu.edu/category/service-and-community/alumni/">Alumni</a></li>
+        </ul>
+        </li>
+        <li id="menu-item-142701" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-142701"><a href="https://news.ncsu.edu/for-media/">For Media</a>
+        <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-143351" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-143351"><a href="/news-releases">News Releases</a></li>
+	       <li id="menu-item-145351" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-145351"><a href="/in-the-news/">In the News</a></li>
+	       <li id="menu-item-142751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-142751"><a href="http://www.ncsu.edu/experts/">Experts</a></li>
+	       <li id="menu-item-221601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-221601"><a href="https://news.ncsu.edu/for-media/tv-studio/">TV Studio</a></li>
+        </ul>
+        </li>
+        <li id="menu-item-142721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-142721"><a href="https://news.ncsu.edu/about/">About NC State News</a>
+        <ul class="sub-menu list-unstyled">
+	       <li id="menu-item-142731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142731"><a href="https://news.ncsu.edu/about/contact/">Contact</a></li>
+	       <li id="menu-item-142741" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142741"><a href="https://news.ncsu.edu/about/send-a-tip/">Send a Tip</a></li>
+        </ul>
+        </li>
+        <li class="menu-item search-item">
+		<div class="glyphicon glyphicon-search search-icon"></div>
+		<div class="masthead-search">
+			<form method="get" id="searchform" action="/">
+				<input type="text" value="" name="s" id="s" />
+				<label for="searchsubmit" class="masthead-search-button glyphicon glyphicon-search">
+					<input type="submit" id="searchsubmit" value="" />
+				</label>
+			</form>
+		</div>
+        </li>
+	</ul>
+		<button type="button" id="menu-toggle">
+			<span class="sr-only">Toggle Navigation</span>
+			Menu<span class="glyphicon glyphicon-thin-menu" aria-hidden="true"></span>
+		</button>
+	</div>
+</div>
+<div id="mobile-nav">
+    <div id="level-1">
+        <ul class="list-unstyled">
+		  <li>
+		      <a href="/category/research-and-innovation">Research and Innovation</a>
+              <ul class="list-unstyled">
+                    <li><a href="/category/research-and-innovation/the-abstract">The Abstract</a></li>
+                    <li><a href="/category/research-and-innovation/partners">Partners</a></li>
+              </ul>
+          </li>
+          <li>
+                <a href="/category/campus-life">Campus Life</a>
+                <ul class="list-unstyled">
+                    <li><a href="/category/campus-life/academics">Academics</a></li>
+                    <li><a href="/category/campus-life/athletics">Athletics</a></li>
+                    <li><a href="/category/campus-life/events">Events</a></li>
+                    <li><a href="/category/campus-life/students">Students</a></li>
+                </ul>
+          </li>
+          <li>
+                <a href="/category/faculty-and-staff">Faculty and Staff</a>
+                <ul class="list-unstyled">
+                    <li><a href="/category/faculty-and-staff/hr-finance">HR and Finance</a></li>
+                    <li><a href="/category/faculty-and-staff/awards-honors">Awards and Honors</a></li>
+                    <li><a href="/category/faculty-and-staff/faculty-focus">Faculty Focus</a></li>
+				</ul>
+            </li>
+			<li>
+				<a href="/category/service-and-community">Service and Community</a>
+				<ul class="list-unstyled">
+					<li><a href="/category/service-and-community/alumni">Alumni</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/for-media">For the Media</a>
+				<ul class="list-unstyled">
+					<li><a href="/news-releases">News Releases</a></li>
+					<li><a href="/in-the-news">In the News</a></li>
+					<li><a href="http://www.ncsu.edu/experts/">Experts</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/about-news">About</a>
+				<ul class="list-unstyled">
+					<li><a href="/about-news/contact">Contact</a></li>
+					<li><a href="/about-news/send-a-tip">Send a Tip</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/search"><span class="glyphicon glyphicon-search" style="margin-right: 0.5em;"></span>Search</a>
+			</li>
+        </ul>
+    </div>
+</div>
+<div id="main-content" itemscope itemtype="http://schema.org/Article">
+    <article  id="post-6607" class="post-6607 post type-post status-publish format-standard hentry category-academics category-campus-life category-faculty-and-staff category-partners category-research-and-innovation tag-archive-features tag-chass tag-college-of-agriculture-and-life-sciences tag-college-of-engineering tag-college-of-humanities-and-social-sciences tag-college-of-natural-resources tag-college-of-textiles tag-csi-nc-state tag-faculty tag-forensics tag-the-work tag-video">
+    <div class="container">
+        <header class="col-md-9 post-header">
+            <h1 class="post-title" itemprop="name">Forensic Databases</h1>
+        </header>
+        <div class="row">
+            <div class="section-article">
+                <!--
+                <div class="article-content col-md-9 col-sm-12">
+                    <section class="entry-content">
+                    <div class="entry-feature-image">
+                         <img src="http://news.ncsu.edu/wp-content/uploads/2012/01/csi-ncstate-large.jpg" class="img-responsive" itemprop="image" />
+                        <div class="caption">
+                        <p>NC State anthropology professor Ann Ross (left) and entomology professor Wes Watson (right) are two of the experts leading the university's growing forensic sciences program.</p>
+                        </div>
+                    </div>
+                    <div class="entry-meta">
+                        <span class="entry-date" itemprop="datePublished" content="2012-01-23">January 23, 2012</span>
+                        <span class="meta-sep">&nbsp;|&nbsp;</span>
+                        <span class="author vcard"><a href="mailto:web_feedback@ncsu.edu">University Communications</a></span>
+	                </div>
+                    <div class="entry-links"></div>
+                    </section>
+                </div>
+                -->
+                <div class="article-content col-md-9 col-sm-12">
+                    <section class="entry-content">
+                    The Seth Faith Laboratory has developed a Cirius database utilizing Python script and MySQL database. A FASTQ file will be converted to a FASTA
+                    file, and a FASTA file will be analyzed. The results include two FASTA files of matched and unmatched according to the user's selections, a matched
+                    text file including reverse and forward reads, and a second matched file in which the reverse complement of the FWD sequence is grouped with the
+                    Forward read. The results of the analysis also includes the number of base pairs, the percentage of the total number of reads, the allele total number of reads,
+                    the percentage of the allele number of reads. The left and right sequences are available if selected.
+                    </section>
+                </div>
+                <!-- <div class="sidebar col-md-3 col-sm-12">
+                    <div class="meta-links">
+                        <h3>Share</h3>
+                        <ul class="social-channels list-unstyled">
+                            <li><a href="http://www.facebook.com/sharer/sharer.php/?u=https%3A%2F%2Fnews.ncsu.edu%2F2012%2F01%2Fcsi-nc-state%2F" target="_blank"><span class="glyphicon glyphicon-fb"></span></a></li>
+                            <li><a href="https://twitter.com/intent/tweet?text=&url=https%3A%2F%2Fnews.ncsu.edu%2F2012%2F01%2Fcsi-nc-state%2F&via="><span class="glyphicon glyphicon-twitter"></span></a></li>
+                            <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fnews.ncsu.edu%2F2012%2F01%2Fcsi-nc-state%2F&title=CSI: NC State&source='NC State News'" target="_blank"><span class="glyphicon glyphicon-linkedin"></span></a></li>
+                            <li><a href="https://plus.google.com/share?url=https%3A%2F%2Fnews.ncsu.edu%2F2012%2F01%2Fcsi-nc-state%2F" target="_blank"><span class="glyphicon glyphicon-gplus"></span></a></li>
+                            <li><a href="mailto:?subject=CSI: NC State&body=NC State experts unlock the secrets of soil samples, skulls, fibers and more to help law enforcement turn cold cases into convictions.<br /><br />https://news.ncsu.edu/2012/01/csi-nc-state/"><span class="glyphicon glyphicon-email"></span></a></li>
+                        </ul>
+                        <h3>Filed Under</h3>
+                        <div id="category-list">
+                            <ul class="list-unstyled">
+					           <a href="https://news.ncsu.edu/category/campus-life/" title="Campus Life">Campus Life</a>, <a href="https://news.ncsu.edu/category/faculty-and-staff/" title="Faculty and Staff">Faculty and Staff</a>, <a href="https://news.ncsu.edu/category/research-and-innovation/" title="Research and Innovation">Research and Innovation</a>
+                            </ul>
+                        </div>
+                        <h3>Tags</h3>
+				        <div class="tag-list">
+					       <a href="https://news.ncsu.edu/tag/chass/">chass</a>,
+                           <a href="https://news.ncsu.edu/tag/college-of-agriculture-and-life-sciences/">college of agriculture and life sciences</a>,
+                           <a href="https://news.ncsu.edu/tag/college-of-engineering/">college of engineering</a>,
+                           <a href="https://news.ncsu.edu/tag/college-of-humanities-and-social-sciences/">college of humanities and social sciences</a>,
+                           <a href="https://news.ncsu.edu/tag/college-of-natural-resources/">college of natural resources</a>,
+                           <a href="https://news.ncsu.edu/tag/college-of-textiles/">college of textiles</a>,
+                           <a href="https://news.ncsu.edu/tag/csi-nc-state/">csi: nc state</a>,
+                           <a href="https://news.ncsu.edu/tag/faculty/">faculty</a>,
+                           <a href="https://news.ncsu.edu/tag/forensics/">forensics</a>,
+                           <a href="https://news.ncsu.edu/tag/the-work/">the work</a>,
+                           <a href="https://news.ncsu.edu/tag/video/">video</a>
+                        </div>
+
+	               </div>
+                </div> -->
+                <!--<div class="post-comments">
+                    <div class="comments white-bg col-md-9 col-sm-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9">
+
+                                    <div id="respond" class="comment-respond"> -->
+                                    <div  class="comments white-bg col-md-9 col-sm-12">
+                                        <h3 id="reply-title" class="comment-reply-title">Cirius selections </h3>
+                                        <form action="./cgi-bin/web_output.py" method="post" id="commentform" class="comment-form" enctype="multipart/form-data"  onsubmit="javascript: return validate_activity();">
+                                        <table style="border-collapse:collapse;border:black solid 1px;width:600px;">
+
+                                        <tr>
+                                            <th style="width:150px;padding-left:5px;padding-top:5px;">File Upload<span class="required">*</span></th>
+                                            <td style="padding-top:5px;"><input type="file" name="fname" id="fname" style="width:400px;font-size:12px;" accept=".fasta, .fastq" onchange="save_path(this);"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td style="font-size:10px"><i>Acceptable file formats: FASTA, FASTQ* <br>
+                                                * Uploading a FASTQ file will result in conversion to FASTA file.</i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding-left:5px;padding-top:5px;" valign="top">Species</th>
+                                            <td style="padding-top:5px;"  valign="top">
+                                                <input type="radio" name="species" value="human" checked="checked">&nbsp;Human<br/>
+                                                <input type="radio" name="species" value="animal">&nbsp;Animal
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th style="padding-left:5px;padding-top:5px;" valign="top">Number to analyze<span class="required">*</span></th>
+                                            <td style="padding-top:5px;">
+                                                <input type="radio" name="numanal" value="1000" checked="checked">&nbsp;1000<br/>
+                                                <input type="radio" name="numanal" value="100000">&nbsp;100000 (approximately 1.5 hr for 94 markers in all alleles)<br/>
+                                                <input type="radio" name="numanal" value="all">&nbsp;All records
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding-left:5px;padding-top:5px;" valign="top">Select Allele/Markers<span class="required">*</span></th>
+                                            <td style="padding-top:5px;">
+                                            <table style="border-collapse:collapse;border:0px solid black;">
+                                            <tr>
+                                                <td style="width:150px;" valign="top">
+                                                <select id="fallele" name="fallele" style="font-size:12px;" onchange="popMarkers(this);" >
+                                                    <option value="all" checked="checked" >All alleles</option>
+                                                    <option value="AnY">Autosomal and Y</option>
+                                                    <option value="AnX">Autosomal and X</option>
+                                                    <option value="XnY">X and Y</option>
+                                                    <option value="A">Autosomal</option>
+                                                    <option value="X">X</option>
+                                                    <option value="Y">Y</option>
+                                                </select>
+                                                </td>
+                                                <td valign="top" style="padding-bottom:5px;">
+                                                <select name="markers" size="20"  multiple="multiple">
+                                                    <option value="All" selected="selected">All Markers</option>
+                                                    <optgroup label="Autosomal">
+                                                        <option value="AMEL">AMEL</option>
+                                                        <option value="CSF1PO">CSF1PO</option>
+                                                        <option value="D1S1627">D1S1627</option>
+                                                        <option value="D1S1656">D1S1656</option>
+                                                        <option value="D1S1677">D1S1677</option>
+                                                        <option value="D2S1338">D2S1338</option>
+                                                        <option value="D2S1776">D2S1776</option>
+                                                        <option value="D2S441">D2S441</option>
+                                                        <option value="D3S1358">D3S1358</option>
+                                                        <option value="D4S2408">D4S2408</option>
+                                                        <option value="D5S2500">D5S2500</option>
+                                                        <option value="D5S818">D5S818</option>
+                                                        <option value="D6S1017">D6S1017</option>
+                                                        <option value="D6S1043">D6S1043</option>
+                                                        <option value="D6S474">D6S474</option>
+                                                        <option value="D7S820">D7S820</option>
+                                                        <option value="D8S1179">D8S1179</option>
+                                                        <option value="D9S1122">D9S1122</option>
+                                                        <option value="D9S2157">D9S2157</option>
+                                                        <option value="D10S1248">D10S1248</option>
+                                                        <option value="D12S391">D12S391</option>
+                                                        <option value="D13S317">D13S317</option>
+                                                        <option value="D14S1434">D14S1434</option>
+                                                        <option value="D16S539">D16S539</option>
+                                                        <option value="D17S1301">D17S1301</option>
+                                                        <option value="D18S51">D18S51</option>
+                                                        <option value="D19S433">D19S433</option>
+                                                        <option value="D20S482">D20S482</option>
+                                                        <option value="D21S11">D21S11</option>
+                                                        <option value="D22S1045">D22S1045</option>
+                                                        <option value="FGA">FGA</option>
+                                                        <option value="PENTAD">PENTAD</option>
+                                                        <option value="PENTAE">PENTAE</option>
+                                                        <option value="SE33">SE33</option>
+                                                        <option value="TH01">TH01</option>
+                                                        <option value="TPOX">TPOX</option>
+                                                        <option value="VWA">VWA</option>
+                                                    </optgroup>
+                                                    <optgroup label="X">
+                                                        <option value="DXS10011">DXS10011</option>
+                                                        <option value="DXS10074">DXS10074</option>
+                                                        <option value="DXS101">DXS101</option>
+                                                        <option value="DXS10101">DXS10101</option>
+                                                        <option value="DXS10103">DXS10103</option>
+                                                        <option value="DXS10134">DXS10134</option>
+                                                        <option value="DXS10135">DXS10135</option>
+                                                        <option value="DXS10148">DXS10148</option>
+                                                        <option value="DXS6789">DXS6789</option>
+                                                        <option value="DXS6795">DXS6795</option>
+                                                        <option value="DXS6800">DXS6800</option>
+                                                        <option value="DXS6801">DXS6801</option>
+                                                        <option value="DXS6807">DXS6807</option>
+                                                        <option value="DXS6809">DXS6809</option>
+                                                        <option value="DXS6854">DXS6854</option>
+                                                        <option value="DXS7132">DXS7132</option>
+                                                        <option value="DXS7133">DXS7133</option>
+                                                        <option value="DXS7423">DXS7423</option>
+                                                        <option value="DXS7424">DXS7424</option>
+                                                        <option value="DXS8377">DXS8377</option>
+                                                        <option value="DXS8378">DXS8378</option>
+                                                        <option value="DXS981">DXS981</option>
+                                                        <option value="DXS9895">DXS9895</option>
+                                                        <option value="DXS9902">DXS9902</option>
+                                                        <option value="GATA165B12">GATA165B12</option>
+                                                        <option value="GATA172D05">GATA172D05</option>
+                                                        <option value="GATA31E08">GATA31E08</option>
+                                                        <option value="HPRTB">HPRTB</option>
+                                                    </optgroup>
+                                                    <optgroup label="Y">
+                                                        <option value="DYF387S1">DYF387S1</option>
+                                                        <option value="DYS19">DYS19</option>
+                                                        <option value="DYS385">DYS385</option>
+                                                        <option value="DYS389I">DYS389I</option>
+                                                        <option value="DYS389II">DYS389II</option>
+                                                        <option value="DYS390">DYS390</option>
+                                                        <option value="DYS391">DYS391</option>
+                                                        <option value="DYS392">DYS392</option>
+                                                        <option value="DYS393">DYS393</option>
+                                                        <option value="DYS437">DYS437</option>
+                                                        <option value="DYS438">DYS438</option>
+                                                        <option value="DYS439">DYS439</option>
+                                                        <option value="DYS448">DYS448</option>
+                                                        <option value="DYS449">DYS449</option>
+                                                        <option value="DYS456">DYS456</option>
+                                                        <option value="DYS458">DYS458</option>
+                                                        <option value="DYS460">DYS460</option>
+                                                        <option value="DYS481">DYS481</option>
+                                                        <option value="DYS505">DYS505</option>
+                                                        <option value="DYS518">DYS518</option>
+                                                        <option value="DYS522">DYS522</option>
+                                                        <option value="DYS533">DYS533</option>
+                                                        <option value="DYS549">DYS549</option>
+                                                        <option value="DYS570">DYS570</option>
+                                                        <option value="DYS576">DYS576</option>
+                                                        <option value="DYS612">DYS612</option>
+                                                        <option value="DYS635">DYS635</option>
+                                                        <option value="DYS643">DYS643</option>
+                                                        <option value="GATAH4">GATAH4</option>
+                                                    </optgroup>
+                                                </select>
+                                                </td>
+                                                <td valign="top" style="padding-left:5px;font-size:10px;">&nbsp;<i>Select more than one marker by holding down
+                                                    control (CTRL) and clicking markers.</i>
+                                                </td>
+                                            </tr>
+                                            </table>
+                                            </td>
+                                        </tr>
+                                        </table>
+
+                                        <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit" >
+                                        <input type='hidden' name='fpath' value='' id='fpath' />
+
+                                        </form>
+                                    </div><!-- #respond -->
+						         <!--  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="sidebar">
+                    <div class="post-links">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </article> <!-- Closes Blog Section -->
+</div> <!-- Closes Main Content -->
+
+<!-- Twitter share widget -->
+<script type="text/javascript" async src="//platform.twitter.com/widgets.js"></script>
+<footer>
+	<div class="container">
+		<div class="footer-main">
+			<div class="footer-address">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="133.872px" height="53.155px" viewBox="7.052 11.029 133.872 53.155" enable-background="new 7.052 11.029 133.872 53.155" xml:space="preserve">
+                <style>.style0{fill:	#FFFFFF;}
+                </style>
+                <g><g><polygon points="11.837,18.02 11.902,18.02 18.59,35.932 25.337,35.932 25.337,11.434 20.555,11.434 20.555,28.4 20.487,28.4 13.975,11.434 7.052,11.434 7.052,35.932 11.837,35.932" class="style0"/>
+                <path d="M37.871 32.675c-2.886 0-3.259-2.715-3.259-8.99c0-6.277 0.374-8.993 3.259-8.993 c1.526 0 2.101 1.226 2.101 4.479h5.023c0.204-5.255-1.9-8.142-7.124-8.142c-8.446 0-8.446 6.176-8.446 12.655 c0 6.41 0 12.651 8.446 12.651c4.782 0 7.396-2.104 7.396-8.647h-5.054C40.141 29.623 40.246 32.675 37.871 32.675z" class="style0"/>
+                <path d="M71.253 29.246c0-7.701-10.315-7.291-10.315-11.937c0-1.699 0.989-2.616 2.647-2.616 c2.07 0 2.376 1.866 2.376 3.699h4.986c0.34-5.124-2.141-7.362-7.121-7.362c-6.247 0-8.075 3.054-8.075 6.888 c0 7.3 10.309 7.562 10.309 11.977c0 1.659-0.843 2.78-2.573 2.78c-2.82 0-2.919-1.969-2.919-4.311h-5.122 c-0.272 4.243 0.915 7.972 7.26 7.972C66.601 36.336 71.253 35.595 71.253 29.246z" class="style0"/>
+                <polygon points="78.687,35.932 83.812,35.932 83.812,15.511 89.511,15.511 89.511,11.434 72.986,11.434 72.986,15.511 78.687,15.511" class="style0"/>
+                <path d="M94.759 11.434l-6.78 24.498h5.056l1.389-5.428h6.992l1.35 5.428h5.395l-6.647-24.498H94.759z M95.445 26.741l2.336-10.591h0.064l2.479 10.591H95.445z" class="style0"/>
+                <polygon points="117.395,35.932 117.395,15.511 123.101,15.511 123.101,11.434 106.574,11.434 106.574,15.511 112.279,15.511 112.279,35.932" class="style0"/>
+                <polygon points="139.128,32.166 130.604,32.166 130.604,25.014 138.207,25.014 138.207,21.245 130.604,21.245 130.604,15.203 138.85,15.203 138.85,11.434 125.477,11.434 125.477,35.932 139.128,35.932" class="style0"/>
+                <path d="M16.987 56.354c0 2.61 0 6.33-4.081 6.33c-4.078 0-4.078-3.72-4.078-6.33V43.76H7.052v13.905 c0 5.162 2.719 6.519 5.854 6.519c3.139 0 5.851-1.355 5.851-6.519V43.76h-1.77V56.354z" class="style0"/>
+                <polygon points="34.914,61.295 34.858,61.352 26.73,43.76 24.009,43.76 24.009,63.788 25.788,63.788 25.788,46.07 25.844,46.016 34,63.788 36.688,63.788 36.688,43.76 34.914,43.76" class="style0"/>
+                <rect x="42.272" y="43.76" width="1.773" height="20.028" class="style0"/>
+                <polygon points="54.42,61.688 54.37,61.688 49.625,43.76 47.734,43.76 53.314,63.788 55.532,63.788 61.08,43.76 59.363,43.76" class="style0"/>
+                <polygon points="66.462,54.251 73.438,54.251 73.438,52.75 66.462,52.75 66.462,45.261 73.765,45.261 73.765,43.76 64.691,43.76 64.691,63.788 73.959,63.788 73.959,62.296 66.462,62.296" class="style0"/>
+                <path d="M85.31 53.389v-0.052c2.689-0.614 3.107-2.28 3.107-4.776c0-3.519-0.967-4.801-4.828-4.801h-5.516v20.028 h1.771v-9.704h3.361c3.849 0 3.269 3.854 3.293 4.721c0.033 1.072 0.11 4.405 0.277 4.983h1.692 c-0.054-0.772-0.191-1.548-0.191-2.327C88.278 54.301 88.111 53.97 85.31 53.389z M82.727 52.583h-2.882v-7.322h3.633 c2.076 0 3.16 0.528 3.16 3.272C86.638 51.895 85.396 52.583 82.727 52.583z" class="style0"/>
+                <path d="M98.634 52.669c-2.277-1.637-3.778-1.718-3.778-4.688c0-2.356 1.368-3.107 3.521-3.107 c2.726 0 3.34 1.501 3.396 3.967h1.795c0-2.883-0.884-5.469-5.048-5.469c-3.269 0-5.462 1.445-5.44 4.912 c0.037 2.002 0.205 3.193 4.09 5.578c2.881 1.777 4.685 2.55 4.685 5.271c0 2.305-1.138 3.553-3.476 3.553 c-3.578 0-3.734-2.308-3.734-4.524h-1.835c-0.164 3.914 1.581 6.022 5.489 6.022c3.5 0 5.326-1.744 5.326-5.324 C103.623 54.971 101.102 54.441 98.634 52.669z" class="style0"/>
+                <rect x="108.628" y="43.76" width="1.774" height="20.028" class="style0"/>
+                <polygon points="114.231,45.261 119.115,45.261 119.115,63.788 120.896,63.788 120.896,45.261 125.776,45.261 125.776,43.76 114.231,43.76" class="style0"/>
+                <polygon points="139.152,43.76 134.349,53.723 129.771,43.76 127.769,43.76 133.432,55.473 133.432,63.788 135.214,63.788 135.214,55.473 140.923,43.76" class="style0"/>
+                </g></g>
+                </svg>
+                <address>
+					Raleigh, NC 27695<br />
+					<span class="phone-number">919.515.2011</span>
+				</address>
+            </div>
+			<div class="footer-links">
+				<div class="row">
+					<ul class="ncstate-padded-list">
+						<li><a href="/about">About NC State News</a></li>
+						<li><a href="http://web.ncsu.edu/annual-report/2014-2015/">Chancellor's Annual Report</a></li>
+						<li><a href="http://policies.ncsu.edu/">University Policies</a></li>
+						<li><a href="/about/contact/">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer-interactive">
+				<h5>Campus Map</h5>
+				<a href="http://maps.ncsu.edu/#/">
+					<img src="https://news.ncsu.edu/wp-content/themes/ncstate-news/img/campus-map.jpg" class="img-responsive" />
+				</a>
+			</div>
+		</div>
+		<div class="footer-sub">
+			<ul class="social-channels list-unstyled" aria-label="NC State Social Media channels">
+				<li><a href="https://www.facebook.com/ncstate"><span class="glyphicon glyphicon-fb" data-alt="facebook"></span></a></li>
+				<li><a href="https://www.youtube.com/ncstate"><span class="glyphicon glyphicon-youtube" data-alt="youtube"></span></a></li>
+				<li><a href="http://www.twitter.com/ncstate/"><span class="glyphicon glyphicon-twitter" data-alt="twitter"></span></a></li>
+				<li><a href="http://instagram.com/ncstate"><span class="glyphicon glyphicon-instagram" data-alt="instagram"></span></a></li>
+				<li><a href="http://www.flickr.com/photos/ncstate"><span class="glyphicon glyphicon-flickr" data-alt="flickr"></span></a></li>
+				<li><a href="http://pinterest.com/ncstate/"><span class="glyphicon glyphicon-pintrest" data-alt="pinterest"></span></a></li>
+				<li><a href="https://plus.google.com/b/103088095123196361068/103088095123196361068/"><span class="glyphicon glyphicon-gplus" data-alt="google plus"></span></a></li>
+				<li><a href="http://news.ncsu.edu/feed/rss"><span class="glyphicon glyphicon-rss" data-alt="RSS"></span></a></li>
+			</ul>
+			<div class="copyright">
+				<p>&#169; 2016 NC State University. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Photo Gallery -->
+<script type="text/javascript" src="https://news.ncsu.edu/wp-content/themes/ncstate-news/js/fancybox/jquery.fancybox.pack.js?v=2.0.6"></script>
+<script type="text/javascript" src="https://news.ncsu.edu/wp-content/themes/ncstate-news/js/fancybox/jquery.fancybox-buttons.js?v=1.0.2"></script>
+<script type="text/javascript" src="https://news.ncsu.edu/wp-content/themes/ncstate-news/js/fancybox/jquery.fancybox-media.js?v=1.0.0"></script>
+
+<!-- Main js -->
+<script src="https://news.ncsu.edu/wp-content/themes/ncstate-news/js/main.js"></script>
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2824154-1', 'auto'); // Default News & Core property.
+  ga('create', 'UA-2824154-5', 'auto', {'name': 'global'});  // NC State Global.
+  ga('send', 'pageview');
+  ga('global.send', 'pageview'); // Send page view for NC State Global Property.
+
+</script>
+
+ <script>
+ /**
+  * Function that tracks a click on an outbound link in Google Analytics.
+  * This function takes a category, name, and valid URL string as an argument,
+  * and uses the name as the event label.
+  */
+  var trackOutboundLink = function(category, name, url) {
+     ga('send', 'event', category, 'click', name, {'hitCallback':
+       function () {
+       document.location = url;
+       }
+     });
+  }
+
+    /**
+  * Function that tracks a form submit in Google Analytics.
+  * This function takes a category and a name as arguments
+  * and uses the name as the event label.
+  */
+  var trackFormSubmit = function(category, name, button) {
+     var value = $('input#amount').val();
+     ga('send', 'event', category, name, value, {'hitCallback':
+       function () {
+       $(button).parents('form').first().submit();
+       }
+     });
+  }
+  </script>
+
+<script type='text/javascript' src='https://news.ncsu.edu/wp-content/plugins/akismet/_inc/form.js?ver=3.1.3'></script>
+
+</body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+
+ Served from: news.ncsu.edu @ 2016-01-15 03:55:10 by W3 Total Cache -->
